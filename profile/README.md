@@ -28,14 +28,18 @@ Image Registry: Push Docker images to Amazon ECR.
 Deploy: Use AWS CodeDeploy with Kubernetes configurations to deploy to your EKS cluster.
 3. Steps to Build the Pipeline
 **Step 1:** Set Up the EKS Cluster
+
 Create an EKS cluster:
 bash
 Copy code
+
 eksctl create cluster --name my-cluster --region us-west-2 --nodes 3
+
 Configure kubectl to interact with the cluster:
 bash
 Copy code
 aws eks --region us-west-2 update-kubeconfig --name my-cluster
+
 
 **Step 2:** Prepare the Application
 
@@ -57,10 +61,12 @@ Define pipeline stages:
 
 Deploy: Use a custom deployment script or CodeDeploy with your kubectl commands.
 **Step 4:** Automate Docker Image Build and Push
+
 Create a CodeBuild project with a buildspec.yml file:
 yaml
 Copy code
-version: 0.2
+
+**version: 0.2
 phases:
   pre_build:
     commands:
@@ -75,17 +81,29 @@ phases:
     commands:
       - echo Pushing the Docker image...
       - docker push <ECR_URI>:latest
-      - echo Build completed on `date`
+      - echo Build completed on `date`**
+
+      
 Replace <ECR_URI> with your Amazon ECR repository URI.
 **Step 5:** Deploy to Kubernetes
+
+
 Use kubectl commands to apply Kubernetes configurations:
 bash
 Copy code
+
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
+
+
 Automate this in the pipeline by adding a deploy stage that runs these commands.
+
+
 4. Monitor and Optimize
+
+
 Use AWS CloudWatch and AWS X-Ray for monitoring.
-Enable Kubernetes metrics with Prometheus or Amazon Managed Service for Prometheus.
+
+**Enable Kubernetes metrics with Prometheus or Amazon Managed Service for Prometheus.**
 
 
