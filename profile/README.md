@@ -23,7 +23,7 @@ A typical pipeline includes:
 
 Source Control: Store your code inGitHub
 
-Build: Use AWS CodeBuild or Jenkins to build and package the application.
+**Build:** Use AWS CodeBuild or Jenkins to build and package the application.
 Image Registry: Push Docker images to Amazon ECR.
 Deploy: Use AWS CodeDeploy with Kubernetes configurations to deploy to your EKS cluster.
 3. Steps to Build the Pipeline
@@ -45,7 +45,10 @@ aws eks --region us-west-2 update-kubeconfig --name my-cluster
 
 Write your Dockerfile to containerize the application.
 Create Kubernetes deployment and service YAML files (e.g., deployment.yaml, service.yaml).
-Step 3: Set Up AWS CodePipeline
+
+**Step 3:**   Set Up AWS CodePipeline
+
+
 Create a pipeline using AWS Management Console or CLI:
 
 bash
@@ -60,6 +63,8 @@ Define pipeline stages:
 **Build:** Use AWS CodeBuild to build the Docker image and push it to Amazon ECR.
 
 Deploy: Use a custom deployment script or CodeDeploy with your kubectl commands.
+
+
 **Step 4:** Automate Docker Image Build and Push
 
 Create a CodeBuild project with a buildspec.yml file:
