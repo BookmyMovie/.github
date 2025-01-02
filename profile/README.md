@@ -8,7 +8,7 @@ This project contains following git repository
 6) Configserver
 7) Autherisation server
 
-1. Prerequisites
+**1. Prerequisites**
 AWS Account with proper permissions.
 A running Amazon EKS Cluster.
 Installed CLI tools:
@@ -17,15 +17,17 @@ eksctl
 AWS CLI
 Git
 Containerized application stored in a Docker Registry (e.g., Amazon Elastic Container Registry (ECR)).
-2. Pipeline Architecture
+
+3. Pipeline Architecture
 A typical pipeline includes:
 
-Source Control: Store your code in AWS CodeCommit, GitHub, or another Git repository.
+Source Control: Store your code inGitHub
+
 Build: Use AWS CodeBuild or Jenkins to build and package the application.
 Image Registry: Push Docker images to Amazon ECR.
 Deploy: Use AWS CodeDeploy with Kubernetes configurations to deploy to your EKS cluster.
 3. Steps to Build the Pipeline
-Step 1: Set Up the EKS Cluster
+**Step 1:** Set Up the EKS Cluster
 Create an EKS cluster:
 bash
 Copy code
@@ -34,23 +36,27 @@ Configure kubectl to interact with the cluster:
 bash
 Copy code
 aws eks --region us-west-2 update-kubeconfig --name my-cluster
-Step 2: Prepare the Application
+
+**Step 2:** Prepare the Application
+
 Write your Dockerfile to containerize the application.
 Create Kubernetes deployment and service YAML files (e.g., deployment.yaml, service.yaml).
 Step 3: Set Up AWS CodePipeline
 Create a pipeline using AWS Management Console or CLI:
 
 bash
-Copy code
+**Copy code**
 aws codepipeline create-pipeline --cli-input-json file://pipeline-definition.json
 Replace pipeline-definition.json with the configuration file defining the pipeline structure.
 
 Define pipeline stages:
 
-Source: Fetch the code from CodeCommit, GitHub, or other repositories.
-Build: Use AWS CodeBuild to build the Docker image and push it to Amazon ECR.
+**Source:** Fetch the code from GitHub.
+
+**Build:** Use AWS CodeBuild to build the Docker image and push it to Amazon ECR.
+
 Deploy: Use a custom deployment script or CodeDeploy with your kubectl commands.
-Step 4: Automate Docker Image Build and Push
+**Step 4:** Automate Docker Image Build and Push
 Create a CodeBuild project with a buildspec.yml file:
 yaml
 Copy code
@@ -71,7 +77,7 @@ phases:
       - docker push <ECR_URI>:latest
       - echo Build completed on `date`
 Replace <ECR_URI> with your Amazon ECR repository URI.
-Step 5: Deploy to Kubernetes
+**Step 5:** Deploy to Kubernetes
 Use kubectl commands to apply Kubernetes configurations:
 bash
 Copy code
